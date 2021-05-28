@@ -13,7 +13,7 @@ module.exports = {
     'consistent-return': 0,
     quotes: [2, 'single', { avoidEscape: true, allowTemplateLiterals: true }],
     'prettier/prettier': [
-      'error',
+      'warn',
       {
         trailingComma: 'es5',
         singleQuote: true,
@@ -21,7 +21,7 @@ module.exports = {
       },
     ],
     'vue/no-unused-components': [
-      'error',
+      'warn',
       {
         ignoreWhenBindingPresent: true,
       },
