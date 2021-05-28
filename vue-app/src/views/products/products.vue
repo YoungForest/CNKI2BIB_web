@@ -1,4 +1,5 @@
 <script>
+import FileSaver from 'file-saver';
 import upload from './file-upload.service'; // real service
 
 export default {
@@ -22,22 +23,24 @@ export default {
       let data = '';
       if (!form) data = this.defaultCnki;
       else data = form;
-      console.log(data);
 
       upload(data)
         .then((x) => {
-          console.log('result', x);
           this.bibresult = x;
         })
         .catch((err) => {
-          console.log(err);
+          throw err;
         });
     },
-    saveclip(data) {
-      console.log(data);
+    onCopy() {
+      alert('复制成功');
+    },
+    onError() {
+      alert('复制失败');
     },
     downloadfile(data) {
-      console.log(data);
+      const blob = new Blob([data], {type: 'text/plain;charset=utf-8'});
+      FileSaver.saveAs(blob, 'citation.bib');
     },
   },
 };
@@ -56,8 +59,14 @@ export default {
     <div>
       <textarea v-model="bibresult" class="output-file"></textarea>
     </div>
-    <button v-on:click="saveclip(bibresult)" class="bottonColor">复制到粘贴板</button>
-    <button v-on:click="downloadfile(bibresult)" class="bottonColor">保存为文件</button>
+    <button type="button"
+      v-clipboard:copy="bibresult"
+      v-clipboard:success="onCopy"
+      v-clipboard:error="onError"
+      class="bottonColor">复制到粘贴板</button>
+    <button v-on:click="downloadfile(bibresult)" class="bottonColor">
+      保存为文件
+    </button>
   </div>
 </template>
 
