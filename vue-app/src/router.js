@@ -10,11 +10,11 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/products',
+      redirect: '/cnki2bib',
     },
     {
-      path: '/products',
-      name: 'products',
+      path: '/cnki2bib',
+      name: 'cnki2bib',
       component: () =>
         import(
           /* webpackChunkName: "products" */ './views/products/products.vue'
