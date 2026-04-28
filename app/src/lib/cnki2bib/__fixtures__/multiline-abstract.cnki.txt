@@ -1,0 +1,9 @@
+{Reference Type}: Journal Article
+{Title}: Multiline Test
+{Author}: 测试作者
+{Journal}: 测试期刊
+{Year}: 2023
+{Abstract}: This is line one.
+This is continuation line two.
+And line three.
+{Database Provider}: CNKI

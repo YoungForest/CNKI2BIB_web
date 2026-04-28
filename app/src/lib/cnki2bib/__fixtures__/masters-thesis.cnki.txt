@@ -1,0 +1,8 @@
+{Reference Type}: Thesis
+{Type of Work}: 硕士
+{Title}: 基于深度学习的图像识别研究
+{Author}: 张三
+{Publisher}: 清华大学
+{Year}: 2020
+{Keywords}: 深度学习;图像识别
+{Database Provider}: CNKI

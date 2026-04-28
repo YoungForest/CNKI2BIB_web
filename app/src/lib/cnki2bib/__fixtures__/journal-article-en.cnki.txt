@@ -1,0 +1,10 @@
+{Reference Type}: Journal Article
+{Title}: A Survey on Deep Learning for Image Classification
+{Author}: Smith, John;Doe, Jane;
+{Journal}: Nature Machine Intelligence
+{Year}: 2022
+{Issue}: 3
+{Pages}: 100-120
+{Keywords}: deep learning;image classification
+{ISBN/ISSN}: 2522-5839
+{Database Provider}: CNKI

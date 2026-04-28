@@ -1,0 +1,7 @@
+{Reference Type}: Thesis
+{Type of Work}: 博士
+{Title}: 分布式系统中的一致性算法研究
+{Author}: 李四
+{Publisher}: 北京大学
+{Year}: 2019
+{Database Provider}: CNKI

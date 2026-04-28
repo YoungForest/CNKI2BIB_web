@@ -1,0 +1,6 @@
+{Reference Type}: Journal Article
+{Title}: Test_Title with & ampersand
+{Author}: Smith_J;Doe&Jane;
+{Journal}: A_Journal & Co
+{Year}: 2022
+{Database Provider}: CNKI

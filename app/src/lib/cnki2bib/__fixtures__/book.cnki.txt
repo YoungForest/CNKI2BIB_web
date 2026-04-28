@@ -1,0 +1,7 @@
+{Reference Type}: Book
+{Title}: 算法导论
+{Author}: 科尔曼
+{Publisher}: 机械工业出版社
+{Date}: 2013-01
+{图书印刷版ISBN}: 978-7-111-40701-0
+{Database Provider}: CNKI
