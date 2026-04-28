@@ -1,0 +1,38 @@
+{
+  "journal-article-zh": {
+    "input": "journal-article-zh.cnki.txt",
+    "expected": "journal-article-zh.bib"
+  },
+  "journal-article-en": {
+    "input": "journal-article-en.cnki.txt",
+    "expected": "journal-article-en.bib"
+  },
+  "masters-thesis": {
+    "input": "masters-thesis.cnki.txt",
+    "expected": "masters-thesis.bib"
+  },
+  "phd-thesis": {
+    "input": "phd-thesis.cnki.txt",
+    "expected": "phd-thesis.bib"
+  },
+  "conference": {
+    "input": "conference.cnki.txt",
+    "expected": "conference.bib"
+  },
+  "book": {
+    "input": "book.cnki.txt",
+    "expected": "book.bib"
+  },
+  "multi-entry": {
+    "input": "multi-entry.cnki.txt",
+    "expected": "multi-entry.bib"
+  },
+  "special-chars": {
+    "input": "special-chars.cnki.txt",
+    "expected": "special-chars.bib"
+  },
+  "multiline-abstract": {
+    "input": "multiline-abstract.cnki.txt",
+    "expected": "multiline-abstract.bib"
+  }
+}

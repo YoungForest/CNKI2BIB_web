@@ -1,0 +1,5 @@
+* text=auto eol=lf
+
+# Test fixtures must keep exact byte content from the reference Python backend.
+*.bib       text eol=lf
+*.cnki.txt  text eol=lf

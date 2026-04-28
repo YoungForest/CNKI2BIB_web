@@ -1,96 +1,84 @@
----
-page_type: sample
-languages:
-  - javascript
-  - typescript
-products:
-  - azure functions
-description: 'Apps that can be used with as a starting point for some MS Learn Modules.'
-urlFragment: 'https://github.com/MicrosoftDocs/mslearn-staticwebapp'
----
+# CNKI2BIB_web
 
-# Official Microsoft Sample
+把中国知网导出的 NoteExpress 格式（`.net`）参考文献一键转换为 BibTeX（`.bib`），方便在 LaTeX / Mendeley / Zotero 中使用。
 
-Follow the hands-on tutorial to [publish an Angular, React, Svelte, or Vue JavaScript app and API with Azure Static Web Apps](https://docs.microsoft.com/learn/modules/publish-app-service-static-web-app-api/?WT.mc_id=mslearn_staticwebapp-github-jopapa).
+🌐 在线使用：<https://cnki2bib.com>（部署在 Azure Static Web Apps）
 
-## Static Web App
+## 特点
 
-This repository contains apps that can be used with as a starting point for some MS Learn Modules. Because everyone has their own preference for their JavaScript frameworks/library, you can choose which one you prefer.
+- ✅ **纯前端**：所有转换在浏览器本地完成，**不上传任何文献内容**
+- ✅ **离线可用**：首次加载后无需网络
+- ✅ **与原 Python 后端完全兼容**：cite key 生成算法保持一致，旧的 `.bib` 文件无需重新生成
+- ✅ **支持的实体类型**：`Article`、`Book`、`MastersThesis`、`PhdThesis`、`InProceedings`、`Misc`
+- ✅ **现代 UI**：基于 [Naive UI](https://www.naiveui.com/)，支持深色模式
 
-The shopping theme is used throughout the app.
+## 技术栈
 
-## Pre-Reqs
+- **构建**：Vite 5 + Vue 3 + TypeScript
+- **UI**：Naive UI
+- **中文分词**：[`jieba-wasm`](https://github.com/fengkx/jieba-wasm)（jieba 算法的 WASM 移植）
+- **拼音转换**：[`pinyin-pro`](https://github.com/zh-lx/pinyin-pro)
+- **测试**：Vitest + @vue/test-utils（含与原 Python 后端的 byte-exact 一致性测试）
+- **CI**：GitHub Actions（lint → format → typecheck → test → build）
 
-- Familiarity with one of Angular, React, Svelte, or Vue
-- [Node.js LTS and Git](https://nodejs.org/)
-- [GitHub](https://github.com) account
-- [Visual Studio Code](https://code.visualstudio.com)
+## 本地开发
 
-## Contents
+```sh
+cd app
+npm install
+npm run dev          # 开发服务器
+npm test             # 单元测试 + 组件测试 + 一致性测试
+npm run typecheck    # TypeScript 严格模式
+npm run lint         # ESLint
+npm run build        # 生产构建
+```
 
-The apps written in the following JavaScript frameworks/libraries:
+跑单个测试：
 
-| folder          | Description                                                                                                 |
-| --------------- | ----------------------------------------------------------------------------------------------------------- |
-| **angular-app** | [Sample Angular app](https://github.com/MicrosoftDocs/mslearn-staticwebapp/blob/master/angular-app)         |
-| **api-starter** | [Sample Azure Functions app](https://github.com/MicrosoftDocs/mslearn-staticwebapp/blob/master/api-starter) |
-| **react-app**   | [Sample React app](https://github.com/MicrosoftDocs/mslearn-staticwebapp/blob/master/react-app)             |
-| **svelte-app**  | [Sample Svelte app](https://github.com/MicrosoftDocs/mslearn-staticwebapp/blob/master/svelte-app)           |
-| **vue-app**     | [Sample Vue app](https://github.com/MicrosoftDocs/mslearn-staticwebapp/blob/master/vue-app)                 |
+```sh
+npx vitest run src/lib/cnki2bib/parser.test.ts
+```
 
-## Prerequisites
+## 项目结构
 
-- A GitHub account
-- [Node.js and Git](https://nodejs.org/)
-- [Visual Studio Code](https://code.visualstudio.com/?WT.mc_id=mslearn_staticwebapp-github-jopapa) installed
-- The [Azure Functions extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions?WT.mc_id=mslearn_staticwebapp-github-jopapa) installed
-- The [Azure Functions Core Tools](https://docs.microsoft.com/azure/azure-functions/functions-run-local?WT.mc_id=mslearn_staticwebapp-github-jopapa) installed
+```
+app/
+├── src/
+│   ├── App.vue                  # 顶层布局 + 路由
+│   ├── main.ts
+│   ├── views/
+│   │   ├── Converter.vue        # 主转换页面
+│   │   ├── Converter.test.ts
+│   │   └── About.vue
+│   └── lib/cnki2bib/            # 转换核心库（纯逻辑，无 UI 依赖）
+│       ├── index.ts             # 公开 API: cnkiToBib()
+│       ├── parser.ts            # NoteExpress → 结构化 Entry[]
+│       ├── serializer.ts        # Entry[] → BibTeX 文本
+│       ├── id-generator.ts      # cite key 生成（拼音 / 作者+年份）
+│       ├── jieba-loader.ts      # 浏览器/Node 双环境 jieba 适配
+│       ├── __fixtures__/        # 与 Python 后端的对照样本
+│       └── *.test.ts
+├── vite.config.ts
+└── tsconfig.json
+```
 
-## Problems or Suggestions
+## 一致性保证
 
-[Open an issue here](https://github.com/MicrosoftDocs/mslearn-staticwebapp/issues)
+`src/lib/cnki2bib/golden.test.ts` 用真实 CNKI 输入跑全套转换流程，与原
+[CNKI2BIB_Backend](https://github.com/YoungForest/CNKI2BIB_Backend) Python 实现的输出做
+**byte-exact** 比对，覆盖：
 
-## Resources
+- 解析逻辑（多行合并、字段顺序）
+- 序列化逻辑（字段名归一化、`&`/`_` 转义、author 拆分）
+- cite key（jieba 分词 + pinyin 转换）
 
-### Azure Static Web Apps
+均与原后端完全一致，旧的 `.bib` 文件不会因前端化而失效。
 
-- Learn how to [Publish an Angular, React, Svelte, or Vue JavaScript app and API with Azure Static Web Apps](https://docs.microsoft.com/learn/modules/publish-app-service-static-web-app-api?wt.mc_id=mslearn_staticwebapp-github-jopapa)
-- [API support in Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/apis?wt.mc_id=mslearn_staticwebapp-github-jopapa)
-- [Add an API to Azure Static Web Apps](https://docs.microsoft.com/azure/static-web-apps/add-api?wt.mc_id=mslearn_staticwebapp-github-jopapa)
-- [Authentication and authorization](https://docs.microsoft.com/azure/static-web-apps/authentication-authorization?wt.mc_id=mslearn_staticwebapp-github-jopapa)
-- [Routes](https://docs.microsoft.com/azure/static-web-apps/routes?wt.mc_id=mslearn_staticwebapp-github-jopapa)
-- [Review pre-production environments](https://docs.microsoft.com/azure/static-web-apps/review-publish-pull-requests?wt.mc_id=mslearn_staticwebapp-github-jopapa)
+## 致谢
 
-### Azure Functions
+- [Vopaaz/CNKI_2_BibTeX](https://github.com/Vopaaz/CNKI_2_BibTeX) — 转换算法的最初灵感
+- [YoungForest/CNKI2BIB_Backend](https://github.com/YoungForest/CNKI2BIB_Backend) — Python 后端实现（已迁移到本仓库前端）
 
-- Learn how to [Refactor Node.js and Express APIs to Serverless APIs with Azure Functions](https://docs.microsoft.com/learn/modules/shift-nodejs-express-apis-serverless/?wt.mc_id=mslearn_staticwebapp-github-jopapa)
-- Learn about the Azure Functions [local.settings.json](https://docs.microsoft.com/azure/azure-functions/functions-run-local#local-settings-file?wt.mc_id=mslearn_staticwebapp-github-jopapa) file
-- Learn how to [Deploy to Azure Using Azure Functions](https://code.visualstudio.com/tutorials/functions-extension/getting-started?wt.mc_id=mslearn_staticwebapp-github-jopapa)
-- Sign up for a [Free Trial of Azure](https://azure.microsoft.com/free/?wt.mc_id=mslearn_staticwebapp-github-jopapa)
+## License
 
-### Visual Studio Code
-
-- [Azure Free Trial](https://azure.microsoft.com/free/?wt.mc_id=mslearn_staticwebapp-github-jopapa)
-- [VS Code](https://code.visualstudio.com?wt.mc_id=mslearn_staticwebapp-github-jopapa)
-- [VS Code Extension for Node on Azure](https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-node-azure-pack&WT.mc_id=mslearn_staticwebapp-github-jopapa)
-- Azure Functions [local.settings.json](https://docs.microsoft.com/azure/azure-functions/functions-run-local#local-settings-file?WT.mc_id=mslearn_staticwebapp-github-jopapa) file
-
-### Debugging Resources
-
-- [Debugging Angular in VS Code](https://code.visualstudio.com/docs/nodejs/angular-tutorial?wt.mc_id=mslearn_staticwebapp-github-jopapa)
-- [Debugging React in VS Code](https://code.visualstudio.com/docs/nodejs/reactjs-tutorial?wt.mc_id=mslearn_staticwebapp-github-jopapa)
-- [Debugging Vue in VS Code](https://code.visualstudio.com/docs/nodejs/vuejs-tutorial?wt.mc_id=mslearn_staticwebapp-github-jopapa)
-
-## Contributing
-
-This project welcomes contributions and suggestions. Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
-
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+MIT

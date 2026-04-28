@@ -1,0 +1,11 @@
+{Reference Type}: Journal Article
+{Title}: First Paper
+{Author}: Author A
+{Journal}: Journal A
+{Year}: 2020
+
+{Reference Type}: Journal Article
+{Title}: Second Paper
+{Author}: Author B
+{Journal}: Journal B
+{Year}: 2021

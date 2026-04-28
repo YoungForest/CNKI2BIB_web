@@ -1,0 +1,6 @@
+dist
+node_modules
+coverage
+src/lib/cnki2bib/__fixtures__
+*.bib
+*.cnki.txt

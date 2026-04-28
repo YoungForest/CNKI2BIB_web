@@ -1,0 +1,13 @@
+{Reference Type}: Journal Article
+{Title}: 计算机辅助导航技术在脊柱外科中的应用
+{Author}: 潘紫麟;刘庆鹏;
+{Author Address}: 哈尔滨医科大学附属第二医院骨科;
+{Journal}: 医学综述
+{Year}: 2021
+{Issue}: 11
+{Pages}: 2184-2188
+{Keywords}: 脊柱疾病;计算机辅助;导航技术
+{Abstract}: 随着当代计算机技术的不断发展，计算机辅助导航技术逐渐应用于脊柱外科手术中。
+{ISBN/ISSN}: 1006-2084
+{Notes}: 11-3553/R
+{Database Provider}: CNKI

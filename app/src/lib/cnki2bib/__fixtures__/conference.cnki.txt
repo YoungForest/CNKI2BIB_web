@@ -1,0 +1,7 @@
+{Reference Type}: Conference Proceedings
+{Title}: 一种新的图像分割算法
+{Author}: 王五;赵六;
+{Tertiary Title}: 中国计算机学会全国学术年会
+{Year}: 2021
+{Pages}: 50-55
+{Database Provider}: CNKI
