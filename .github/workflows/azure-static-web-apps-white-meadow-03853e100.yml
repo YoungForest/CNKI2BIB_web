@@ -40,9 +40,13 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_MEADOW_03853E100 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: 'upload'
-          app_location: '/app'
+          # We already ran `npm run build` above, so point app_location at the
+          # pre-built dist folder and skip Oryx. With skip_app_build: true the
+          # SWA action uploads app_location verbatim (output_location is ignored
+          # in this mode), so app_location MUST be the built artifact dir,
+          # otherwise node_modules gets uploaded and the file count limit hits.
+          app_location: '/app/dist'
           api_location: ''
-          output_location: 'dist'
           skip_app_build: true
 
   close_pull_request_job:
