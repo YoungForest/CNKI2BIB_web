@@ -1,0 +1,27 @@
+version: 2
+updates:
+  - package-ecosystem: 'npm'
+    directory: '/app'
+    schedule:
+      interval: 'weekly'
+    open-pull-requests-limit: 5
+    groups:
+      vue-ecosystem:
+        patterns:
+          - 'vue*'
+          - '@vue/*'
+          - '@vitejs/*'
+      dev-tooling:
+        patterns:
+          - 'vitest'
+          - '@vitest/*'
+          - 'eslint*'
+          - '@typescript-eslint/*'
+          - 'prettier'
+          - 'typescript'
+          - 'vue-tsc'
+
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
