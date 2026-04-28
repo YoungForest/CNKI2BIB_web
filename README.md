@@ -2,7 +2,7 @@
 
 把中国知网导出的 NoteExpress 格式（`.net`）参考文献一键转换为 BibTeX（`.bib`），方便在 LaTeX / Mendeley / Zotero 中使用。
 
-🌐 在线使用：<https://cnki2bib.com>（部署在 Azure Static Web Apps）
+🌐 在线使用：<https://youngforest.github.io/CNKI2BIB_web/>（部署在 GitHub Pages）
 
 ## 特点
 
