@@ -16,6 +16,7 @@ import {
 } from 'naive-ui';
 import Converter from './views/Converter.vue';
 import About from './views/About.vue';
+import { trackPageview } from './lib/analytics';
 
 type View = 'converter' | 'about';
 
@@ -30,6 +31,7 @@ const isDark = ref<boolean>(
 
 function onHashChange() {
   currentView.value = viewFromHash();
+  void trackPageview(window.location.hash || '#/');
 }
 function navigate(view: View) {
   window.location.hash = `#/${view}`;

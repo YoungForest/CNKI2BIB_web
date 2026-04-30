@@ -40,6 +40,11 @@ jobs:
           # the base path. If a custom domain is configured later (CNAME at
           # the apex), change this to '/'.
           VITE_BASE: /${{ github.event.repository.name }}/
+          # Google Analytics 4 Measurement ID. NOT a secret — Measurement IDs
+          # are public (anyone can read them in the served HTML). We expose it
+          # as a build-time env var so dev/local builds don't ping production
+          # analytics. Set to empty to disable analytics entirely.
+          VITE_GA_ID: G-P6QFYZQK6S
         run: npm run build
 
       - name: Setup Pages
