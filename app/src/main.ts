@@ -6,7 +6,6 @@ import { initAnalytics } from './lib/analytics';
 // Kick off the WASM jieba init eagerly so the first conversion is instant.
 // Errors during init are non-fatal — the converter falls back gracefully.
 void initJieba().catch((err) => {
-  // eslint-disable-next-line no-console
   console.warn('jieba initialisation failed; ID generation will throw on use:', err);
 });
 

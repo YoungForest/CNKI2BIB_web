@@ -1,6 +1,6 @@
 /// <reference types="vitest" />
 import { fileURLToPath, URL } from 'node:url';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import vue from '@vitejs/plugin-vue';
 
 // Base path. GitHub Pages serves the site under /CNKI2BIB_web/ unless a custom
@@ -21,10 +21,11 @@ export default defineConfig({
     chunkSizeWarningLimit: 800,
     rollupOptions: {
       output: {
-        manualChunks: {
-          'naive-ui': ['naive-ui'],
-          jieba: ['jieba-wasm'],
-          pinyin: ['pinyin-pro'],
+        manualChunks(id) {
+          if (id.includes('/node_modules/naive-ui/')) return 'naive-ui';
+          if (id.includes('/node_modules/jieba-wasm/')) return 'jieba';
+          if (id.includes('/node_modules/pinyin-pro/')) return 'pinyin';
+          return undefined;
         },
       },
     },
